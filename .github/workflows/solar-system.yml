@@ -86,4 +86,16 @@ jobs:
                     path: coverage
                     retention-days: 5
 
-                    
+    
+    docker:
+        name: Containerization
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v4
+
+        - name: Docker Login
+          uses: docker/login-action@v2.2.0
+          with:
+            username: ${{ vars.DOCKERHUB_USERNAME}}
+            password: ${{ secrets.DOCKERHUB_PASSWORD}}
