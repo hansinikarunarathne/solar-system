@@ -11,6 +11,7 @@ env:
     MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
     MONGO_USERNAME: ${{vars.MONGO_USERNAME}}
     MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
+    GIT_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
     unit-testing:
@@ -130,4 +131,6 @@ jobs:
             context: .
             push: true
             tags: 'ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}'
-            
+            secrets: |
+              GIT_AUTH_TOKEN=$GIT_AUTH_TOKEN
+
