@@ -99,8 +99,10 @@ jobs:
         - name: Docker Login
           uses: docker/login-action@v2.2.0
           with:
+            registry: ghcr.io
             username: ${{ vars.DOCKERHUB_USERNAME}}
-            password: ${{ secrets.DOCKERHUB_PASSWORD}}
+            # password: ${{ secrets.DOCKERHUB_PASSWORD}} 
+            password: $GIT_AUTH_TOKEN
 
         - name: Docker Build For Testing
           uses: docker/build-push-action@v4
@@ -131,6 +133,4 @@ jobs:
             context: .
             push: true
             tags: 'ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}'
-            secrets: |
-              GIT_AUTH_TOKEN=$GIT_AUTH_TOKEN
-
+        
